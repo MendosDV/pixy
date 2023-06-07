@@ -1,6 +1,5 @@
-chrome.runtime.sendMessage(chrome.runtime.id, {
-  message: "helloBackground"
-})
+
+chrome.runtime.sendMessage({ message: 'executeScript' });
 
 //   console.log("yoContent");
 

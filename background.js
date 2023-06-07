@@ -1,20 +1,28 @@
-chrome.runtime.onMessage.addListener(messageFromContent = (request, sender, sendResponse) => {
-  console.log(request.message);
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  fetch("www.notrerails.com?dom=" + request.DOM, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then(response => response.text()).then(text => {
+    console.log(text);
+  })
 });
 
+const sendFromContent = () => {
+  chrome.runtime.sendMessage({ DOM: document.body.innerHTML });
+}
 
-// Add URL to visitedSites
 const visitedSites = [];
 chrome.tabs.onUpdated.addListener(addUrl= (tabId, changeInfo, tab) => {
   console.log("updated")
   if (changeInfo.status === 'complete' && tab.active) {
     visitedSites.push({title: tab.title, url: tab.url});
     console.log(visitedSites);
-  }
 
-  chrome.tabs.executeScript({
-    code:  `const text = document.body.innerHTML;
-    const modifiedText = text.replace(/chat/g, "chien");
-    document.body.innerHTML = modifiedText;`
-  });
+    chrome.scripting.executeScript({
+      target: { tabId: tabId },
+      func: sendFromContent
+    });
+  }
 });
