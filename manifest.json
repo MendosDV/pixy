@@ -16,7 +16,10 @@
   },
 
   "permissions": [
-    "tabs"
+    "tabs",
+    "scripting",
+    "http://*/",
+    "https://*/"
   ],
 
   "background": {
