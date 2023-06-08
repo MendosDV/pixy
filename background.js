@@ -1,15 +1,25 @@
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  fetch("www.notrerails.com?dom=" + request.DOM, {
+  fetch("http://localhost:3000/process_dom=", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
-    }
+    },
+    body: JSON.stringify({
+      DOM: request.DOM
+    })
   }).then(response => response.text()).then(text => {
     console.log(text);
   })
+  // console.log('reques', request);
+  // console.log( 'sender' ,sender);
+  // console.log('sendresponse',sendResponse);
+  // console.log('localhost:3000/process_dom=' + request.DOM)
+
+
 });
 
 const sendFromContent = () => {
+  // console.log(document.body.innerHTML);
   chrome.runtime.sendMessage({ DOM: document.body.innerHTML });
 }
 
