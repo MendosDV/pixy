@@ -9,6 +9,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 
     for(let i = 0; i < blured.length; i++){
       blured[i].style.color = "white";
+      blured[i].style.borderRadius = "10px";
       blured[i].style.backgroundColor = "green";
     }
   }
