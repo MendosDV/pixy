@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <title>Pixy - Extension Chrome</title>
@@ -7,6 +8,7 @@
     body {
       font-family: Arial, sans-serif;
       margin: 20px;
+      width: 200px;
     }
 
     h1 {
@@ -29,11 +31,22 @@
   <script defer="true" src="popup.js"></script>
 
 </head>
-<body>
-  <h1>Pixy - Extension Chrome</h1>
-  <p>Bienvenue dans l'extension Pixy !</p>
-  <p>Cette extension vous permet de capturer et d'éditer facilement des captures d'écran.</p>
 
-  <button class="button">Capturer l'écran</button>
+<body>
+  <div id="container">
+    <!-- <h1>Pixy - Extension Chrome</h1>
+    <p>Bienvenue dans l'extension Pixy !</p>
+    <p>Cette extension vous permet de capturer et d'éditer facilement des captures d'écran.</p>
+
+    <button class="button">Capturer l'écran</button> -->
+    <div class="notlogged" id="login">
+      <h3>Sorry, you need to log in first</h3>
+      <a href="http://localhost:3000/users/sign_in" target="_blank" class="login-btn">Log in</a>
+    </div>
+    <div id="profiles">
+
+    </div>
+  </div>
 </body>
+
 </html>

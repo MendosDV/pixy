@@ -15,11 +15,13 @@
   },
   "permissions": [
     "scripting",
-    "tabs"
+    "tabs",
+    "cookies"
   ],
   "host_permissions": [
     "http://*/*",
-    "https://*/*"
+    "https://*/*",
+    "*://*.google.com/"
   ],
   "background": {
     "service_worker": "background.js"
