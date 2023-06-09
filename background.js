@@ -12,6 +12,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }).then(response => response.json())
       .then(data => {
       console.log(data);
+
+
+
     })
   }
 });
