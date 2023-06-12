@@ -11,7 +11,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       })
     }).then(response => response.json())
       .then(data => {
-        console.log(data);
+        // console.log(data);
         const modifiedDOM = data.modifiedDOM;
         chrome.tabs.sendMessage(sender.tab.id, { action: 'updateDOM', modifiedDOM: modifiedDOM });
     })
@@ -25,7 +25,7 @@ const sendFromContent = () => {
 
 const visitedSites = [];
 chrome.tabs.onUpdated.addListener(addUrl= (tabId, changeInfo, tab) => {
-  console.log("updated")
+  // console.log("updated")
   if (changeInfo.status === 'complete' && tab.active) {
     visitedSites.push({title: tab.title, url: tab.url});
     console.log(visitedSites);
