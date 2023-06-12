@@ -8,10 +8,31 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     let green = document.querySelectorAll(".green");
     let red = document.querySelectorAll(".red");
 
+
+
+      for(let i = 0; i < green.length; i++){
+
+        green[i].style.color = "white";
+        green[i].style.borderRadius = "10px";
+        green[i].style.backgroundColor = "green";
+      }
+
+
+
+      for(let i = 0; i < red.length; i++){
+
+        red[i].style.color = "white";
+        red[i].style.borderRadius = "10px";
+        red[i].style.backgroundColor = "red";
+      }
+
+<<<<<<<<< Temporary merge branch 1
     for(let i = 0; i < blured.length; i++){
       blured[i].style.color = "white";
       blured[i].style.borderRadius = "10px";
       blured[i].style.backgroundColor = "green";
     }
+=========
+>>>>>>>>> Temporary merge branch 2
   }
 });
