@@ -8,9 +8,8 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     let blured = document.querySelectorAll(".blur");
 
     for(let i = 0; i < blured.length; i++){
-      blured[i].style.color = "white";
-      blured[i].style.borderRadius = "10px";
-      blured[i].style.backgroundColor = "green";
+      // blured[i].style.color = "#FFA07A";
+      blured[i].style.textDecoration = "#FFA07A wavy underline";
     }
   }
 });
