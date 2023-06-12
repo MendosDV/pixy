@@ -26,5 +26,11 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         red[i].style.backgroundColor = "red";
       }
 
+
+    for(let i = 0; i < blured.length; i++){
+      // blured[i].style.color = "#FFA07A";
+      blured[i].style.textDecoration = "#FFA07A wavy underline";
+    }
+
   }
 });
