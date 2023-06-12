@@ -1,7 +1,4 @@
-// document.querySelector(".button").addEventListener("click", function() {
-//   console.log("yoButton");
-//   console.log(chrome.cookies);
-// })
+
 const container = document.querySelector("#container");
 const login = document.querySelector("#login")
 const profilesDiv = document.querySelector("#profiles")
@@ -48,43 +45,43 @@ const retrieveInfosFromUser = (userToken) => {
 
       data.profiles.forEach(profile => {
         const button = document.createElement('button');
+        button.dataset.category_id = profile.category_id;
         button.innerText = `Profil : ${profile.nickname} category : ${profile.category_id}`;
-        button.addEventListener('click', () => console.log("clicked"));
+        button.addEventListener('click', () => {
+          console.log("clicked")
+          changeCategory(profile.category_id);
+        });
         profilesDiv.appendChild(button);
     });
 });
 };
 
-const changeCategory = (profileId, userToken) => {
+const changeCategory = (category_id) => {
+  chrome.cookies.get(
+    { url: "http://localhost:3000", name: "signed_id" },
+    function (cookie) {
+        fetch(`http://localhost:3000/api/v1/users/change_category`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${cookie.value}`,
+            'X-User-Token': cookie.value
+          },
+          body: JSON.stringify({ category_id: category_id })
+        })
+          .then(response => response.json())
+          .then(data => {
+            // console.log(data);
+            if (data.success) {
+              alert('La catégorie a été modifiée avec succès !');
+              // retrieveInfosFromUser(userToken);
+              // chrome.runtime.sendMessage({ DOM: document.body.innerHTML });
 
-  fetch(`http://localhost:3000/api/v1/profiles/${profileId}/change_category`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'Authorization': `Bearer ${userToken}`,
-      'X-User-Token': userToken
-    },
-    body: JSON.stringify({ category_id: category_id })
-  })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        alert('La catégorie a été modifiée avec succès !');
-        retrieveInfosFromUser(userToken);
-      } else {
-        alert('Une erreur est survenue lors de la modification de la catégorie.');
-      }
+            } else {
+              alert('Une erreur est survenue lors de la modification de la catégorie.');
+            }
+          });
+
     });
 }
-// const getCategories = (profiles) => {
-// fetch("http://localhost:3000/api/v1/categories", {
-//   method: "GET",
-//   headers: {
-//     "Content-Type": "application/json",
-//     "Accept": "application/json",
-//     "Authorization": `Bearer ${profiles}`,
-//     "X-User-Token": profiles
-//   },
-// })
-// }
