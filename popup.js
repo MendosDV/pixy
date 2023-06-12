@@ -13,7 +13,7 @@ function logIn() {
           setTimeout(() => {
             const userToken = cookie.value
             console.log(userToken)
-            // login.style.display = "none"
+            login.style.display = "none"
             retrieveInfosFromUser(userToken)
               , 100
           })
