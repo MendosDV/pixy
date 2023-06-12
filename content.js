@@ -1,15 +1,26 @@
-chrome.runtime.sendMessage({ message: 'executeScript' });
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  if (request.action === 'updateDOM') {
-    const modifiedDOM = request.modifiedDOM;
-    const container = document.body;
-    container.innerHTML = modifiedDOM;
+chrome.runtime.sendMessage({ message: 'executeScript' });  // send message to background
 
-    let blured = document.querySelectorAll(".blur");
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { // listen for message from background
+  if (request.action === 'updateDOM') { // if action is updateDOM
+    const modifiedDOM = request.modifiedDOM; // get modifiedDOM from request
+    const container = document.body; // get body from container
 
-    for(let i = 0; i < blured.length; i++){
-      // blured[i].style.color = "#FFA07A";
-      blured[i].style.textDecoration = "#FFA07A wavy underline";
-    }
+    container.innerHTML = modifiedDOM; // set modifiedDOM to container (body)
+
+    let pixies = document.querySelectorAll("pixy"); // get all pixies
+    let pixyExplication = document.querySelector("pixy-explication") // for each pixy
+    console.log(pixyExplication);
+
+    pixies.forEach(pixy => {
+      pixy.addEventListener("click", function() {
+        let word = pixy.dataset.word;
+        let description = pixy.dataset.description;
+        pixyExplication.innerHTML = description;
+        pixyExplication.style.display = "block";
+        pixyExplication.style.top = pixy.top;
+        pixyExplication.style.left = pixy.left;
+
+      })
+    })
   }
 });
