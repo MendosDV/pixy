@@ -1,36 +1,26 @@
-chrome.runtime.sendMessage({ message: 'executeScript' });
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  if (request.action === 'updateDOM') {
-    const modifiedDOM = request.modifiedDOM;
-    const container = document.body;
-    container.innerHTML = modifiedDOM;
+chrome.runtime.sendMessage({ message: 'executeScript' });  // send message to background
 
-    let green = document.querySelectorAll(".green");
-    let red = document.querySelectorAll(".red");
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { // listen for message from background
+  if (request.action === 'updateDOM') { // if action is updateDOM
+    const modifiedDOM = request.modifiedDOM; // get modifiedDOM from request
+    const container = document.body; // get body from container
 
+    container.innerHTML = modifiedDOM; // set modifiedDOM to container (body)
 
+    let pixies = document.querySelectorAll("pixy"); // get all pixies
+    let pixyExplication = document.querySelector("pixy-explication") // for each pixy
+    console.log(pixyExplication);
 
-      for(let i = 0; i < green.length; i++){
-       
-        green[i].style.color = "white";
-        green[i].style.borderRadius = "10px";
-        green[i].style.backgroundColor = "green";
-      }
+    pixies.forEach(pixy => {
+      pixy.addEventListener("click", function() {
+        let word = pixy.dataset.word;
+        let description = pixy.dataset.description;
+        pixyExplication.innerHTML = description;
+        pixyExplication.style.display = "block";
+        pixyExplication.style.top = pixy.top;
+        pixyExplication.style.left = pixy.left;
 
-
-
-      for(let i = 0; i < red.length; i++){
-
-        red[i].style.color = "white";
-        red[i].style.borderRadius = "10px";
-        red[i].style.backgroundColor = "red";
-      }
-
-
-    for(let i = 0; i < blured.length; i++){
-      // blured[i].style.color = "#FFA07A";
-      blured[i].style.textDecoration = "#FFA07A wavy underline";
-    }
-
+      })
+    })
   }
 });
