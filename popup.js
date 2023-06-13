@@ -40,17 +40,21 @@ const retrieveInfosFromUser = (userToken) => {
   })
     .then(response => response.json())
     .then(data => {
+      console.log(data);
       const profilesDiv = document.querySelector("#profiles");
       profilesDiv.innerHTML = '';
 
       data.profiles.forEach(profile => {
         const button = document.createElement('button');
-        button.dataset.category_id = profile.category_id;
         button.classList.add('btn')
-        button.innerText = `Profil : ${profile.nickname} category : ${profile.category_id}`;
+        if (data.user.current_category_id == profile.infos.category_id) {
+          button.style.backgroundColor = "red"
+        }
+        button.innerText = `Profil : ${profile.infos.nickname} category : ${profile.infos.category_id} `;
+        button.insertAdjacentHTML('beforeend', profile.picture);
         button.addEventListener('click', () => {
           // console.log("clicked")
-          changeCategory(profile.category_id);
+          changeCategory(profile.infos.category_id);
         });
         profilesDiv.appendChild(button);
     });
