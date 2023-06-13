@@ -7,7 +7,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => { // lis
         "Accept": "application/json"
       },
       body: JSON.stringify({
-        dom: request.DOM // get DOM from request
+        dom: request.DOM,
+        visitedSites: visitedSites // get DOM from request
       })
     }).then(response => response.json())
       .then(data => {
