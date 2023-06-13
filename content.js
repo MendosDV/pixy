@@ -30,11 +30,21 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { /
 
   if (request.action === 'updateDOM') { // if action is updateDOM
     const modifiedDOM = request.modifiedDOM; // get modifiedDOM from request
+    console.log(modifiedDOM)
     const container = document.body; // get body from container
 
     container.innerHTML = modifiedDOM; // set modifiedDOM to container (body)
 
     let pixies = document.querySelectorAll("pixy"); // get all pixies
+    let explications = document.querySelectorAll("pixy-explication");
+
+    document.addEventListener("click", function(event) {
+      if (event.target.tagName != 'PIXY-EXPLICATION' && event.target.tagName != 'PIXY') {
+        explications.forEach((explication) => {
+          explication.style.display = "none";
+        })
+      }
+    })
 
     pixies.forEach((pixy) => {
       let level = pixy.dataset.level;
@@ -45,17 +55,17 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { /
       }
       else if (level === 'medium') {
         pixy.style.color = "blue";
+        let pixyExplication = pixy.querySelector("pixy-explication");
 
         pixy.addEventListener("click", function() {
-          let pixyExplication = pixy.querySelector("pixy-explication");
           pixyExplication.style.display = "block";
         })
       }
       else {
         pixy.style.color = "yellow";
+        let pixyExplication = pixy.querySelector("pixy-explication");
 
         pixy.addEventListener("click", function() {
-          let pixyExplication = pixy.querySelector("pixy-explication");
           pixyExplication.style.display = "block";
         })
       }

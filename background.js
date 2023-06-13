@@ -13,6 +13,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => { // lis
     }).then(response => response.json())
       .then(data => {
         const modifiedDOM = data.modifiedDOM; // get modifiedDOM from response
+        console.log(modifiedDOM)
         chrome.tabs.sendMessage(sender.tab.id, { action: 'updateDOM', modifiedDOM: modifiedDOM }); // send modifiedDOM to content
     })
   }
