@@ -1,6 +1,8 @@
 chrome.runtime.sendMessage({ message: 'executeScript' });  // send message to background
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { // listen for message from background
+  let loader = `<div style="width: 100%; position: absolute;" class="boxLoading">Salope !!!!!!!!</div>`
+
   if (request.action === 'updateDOM') { // if action is updateDOM
     const modifiedDOM = request.modifiedDOM; // get modifiedDOM from request
     const container = document.body; // get body from container
@@ -18,22 +20,26 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { /
       }
       else if (level === 'medium') {
         pixy.style.color = "blue";
+
+        pixy.addEventListener("click", function() {
+          let pixyExplication = pixy.querySelector("pixy-explication");
+          pixyExplication.style.display = "block";
+          pixyExplication.style.backgroundColor = "black";
+          pixyExplication.style.top = pixy.top;
+          pixyExplication.style.left = pixy.left;
+        })
       }
       else {
         pixy.style.color = "yellow";
+
+        pixy.addEventListener("click", function() {
+          let pixyExplication = pixy.querySelector("pixy-explication");
+          pixyExplication.style.display = "block";
+          pixyExplication.style.backgroundColor = "black";
+          pixyExplication.style.top = pixy.top;
+          pixyExplication.style.left = pixy.left;
+        })
       }
-    })
-
-    // pixies.forEach(pixy => {
-    //   pixy.addEventListener("click", function() {
-    //     let word = pixy.dataset.word;
-    //     let description = pixy.dataset.description;
-    //     pixyExplication.innerHTML = description;
-    //     pixyExplication.style.display = "block";
-    //     pixyExplication.style.top = pixy.top;
-    //     pixyExplication.style.left = pixy.left;
-
-    //   })
-    // })
+    });
   }
 });
