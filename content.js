@@ -5,7 +5,9 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { /
   const style = `
   <style>
     pixy-explication {
-      width: 20vw;
+      position: relative;
+      display: none;
+      bottom: 0;
       padding: 35px;
       border: 1px solid rgba(255, 255, 255, .25);
       border-radius: 8px;
@@ -51,21 +53,36 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { /
       pixy.style.textDecoration = 'underline orange wavy';
 
       if (level === 'low') {
-        pixy.style.color = "purple";
       }
       else if (level === 'medium') {
-        pixy.style.color = "blue";
         let pixyExplication = pixy.querySelector("pixy-explication");
 
-        pixy.addEventListener("click", function() {
+        pixy.addEventListener("click", function(event) {
+          const rect = pixy.getBoundingClientRect();
+          let x = event.clientX - rect.left;
+          let y = event.clientY - rect.top;
+          console.log('Cursor position: ' + x + ',' + y);
+
+          // x += 10;
+          y += 60;
+          pixyExplication.style.top = "" + y + "px";
+          pixyExplication.style.left = "" + x + "px";
           pixyExplication.style.display = "block";
         })
       }
+
       else {
-        pixy.style.color = "yellow";
         let pixyExplication = pixy.querySelector("pixy-explication");
 
-        pixy.addEventListener("click", function() {
+        pixy.addEventListener("click", function(event) {
+          const rect = pixy.getBoundingClientRect();
+          let x = event.clientX - rect.left;
+          let y = event.clientY - rect.top;
+          console.log('Cursor position: ' + x + ',' + y);
+
+          y += 60;
+          pixyExplication.style.top = "" + y + "px";
+          pixyExplication.style.left = "" + x + "px";
           pixyExplication.style.display = "block";
         })
       }
