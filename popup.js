@@ -15,7 +15,7 @@ function logIn() {
             console.log(userToken)
             login.style.display = "none"
             retrieveInfosFromUser(userToken)
-              , 100
+          , 100
           })
         } else {
           login.style.display = "block";
@@ -54,14 +54,14 @@ const retrieveInfosFromUser = (userToken) => {
         button.insertAdjacentHTML('beforeend', profile.picture);
         button.addEventListener('click', () => {
           // console.log("clicked")
-          changeCategory(profile.infos.category_id);
+          changeCategory(profile.infos.id);
         });
         profilesDiv.appendChild(button);
     });
 });
 };
 
-const changeCategory = (category_id) => {
+const changeCategory = (profileId) => {
   chrome.cookies.get(
     { url: "http://localhost:3000", name: "signed_id" },
     function (cookie) {
@@ -73,7 +73,7 @@ const changeCategory = (category_id) => {
             'Authorization': `Bearer ${cookie.value}`,
             'X-User-Token': cookie.value
           },
-          body: JSON.stringify({ category_id: category_id })
+          body: JSON.stringify({ profile_id: profileId })
         })
           .then(response => response.json())
           .then(data => {
