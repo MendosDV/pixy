@@ -46,9 +46,10 @@ const retrieveInfosFromUser = (userToken) => {
       data.profiles.forEach(profile => {
         const button = document.createElement('button');
         button.dataset.category_id = profile.category_id;
+        button.classList.add('btn')
         button.innerText = `Profil : ${profile.nickname} category : ${profile.category_id}`;
         button.addEventListener('click', () => {
-          console.log("clicked")
+          // console.log("clicked")
           changeCategory(profile.category_id);
         });
         profilesDiv.appendChild(button);
