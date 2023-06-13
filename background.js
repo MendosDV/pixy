@@ -8,11 +8,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => { // lis
         "Accept": "application/json"
       },
       body: JSON.stringify({
-        dom: request.DOM,
-        visitedSites: visitedSites // get DOM from request
+        dom: request.DOM,  // get DOM from request
+        visitedSite: visitedSite
       })
     }).then(response => response.json())
       .then(data => {
+        console.log(data);
         const modifiedDOM = data.modifiedDOM; // get modifiedDOM from response
         console.log(modifiedDOM)
         chrome.tabs.sendMessage(sender.tab.id, { action: 'updateDOM', modifiedDOM: modifiedDOM }); // send modifiedDOM to content
@@ -21,15 +22,17 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => { // lis
 });
 
 const sendFromContent = () => {
+  console.log(document);
   chrome.runtime.sendMessage({ DOM: document.body.innerHTML });
 }
+let visitedSite = {};
 
-const visitedSites = [];
 chrome.tabs.onUpdated.addListener(addUrl= (tabId, changeInfo, tab) => { // listen for tab changes
   console.log("updated")
   if (changeInfo.status === 'complete' && tab.active) { // if tab is active and status is complete
-    visitedSites.push({title: tab.title, url: tab.url}); // add url to visitedSites
-    console.log(visitedSites);
+    visitedSite = {title: tab.title, url: tab.url}
+    console.log(visitedSite);
+
     chrome.scripting.executeScript({ // send message to background from content.js
       target: { tabId: tabId },
       func: sendFromContent
