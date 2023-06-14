@@ -8,12 +8,13 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { /
       position: relative;
       display: none;
       width: 48vh;
-      padding: 35px;
+      padding: 28px;
       border-radius: 8px;
       background-color: rgba(255, 255, 255, 1);
       box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.7);
       backdrop-filter: blur(15px);
       font-family: arial ,sans-serif;
+      z-index: 9999;
     }
 
     pixy-word {
@@ -67,7 +68,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { /
       width: 100%;
       border-bottom: 1px solid rgba(22, 38, 141,0.4);
       padding-bottom: 0.1rem;
-      margin-bottom: 0.8rem;
+      margin-bottom: 1.1rem;
     }
 
     dico {
@@ -128,7 +129,8 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { /
 
     pixies.forEach((pixy) => {
       let level = pixy.dataset.level;
-      pixy.style.textDecoration = 'underline #FF5050 wavy';
+      pixy.style.textDecoration = 'underline rgb(204, 81, 81) wavy'
+      pixy.style.textDecorationThickness = '1px'
 
       if (level === 'low') {
         if (pixy) {
