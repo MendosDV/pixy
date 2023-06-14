@@ -40,8 +40,6 @@ const retrieveInfosFromUser = (userToken) => {
   })
     .then(response => response.json())
     .then(data => {
-      // console.log(data);
-      // console.log(data.user);
       const profilesDiv = document.querySelector("#profiles");
       profilesDiv.innerHTML = '';
 
@@ -49,23 +47,27 @@ const retrieveInfosFromUser = (userToken) => {
         const button = document.createElement('button');
         button.classList.add('btn')
         if (data.user.current_category_id == profile.infos.category_id) {
-          button.style.backgroundColor = "#3BC7FE"
+          button.style.backgroundColor = "#1776ca"
         }
-        button.innerText = `Profil : ${profile.infos.nickname} category : ${profile.category.name} `;
+        button.innerText = `Profil de ${profile.infos.nickname} Level ${profile.category.name} `;
         if (profile.category.name === "Faible") {
-          button.insertAdjacentHTML("beforeend", "<div class='shield'><i class='fas fa-shield-alt'></i></div>");
+          button.insertAdjacentHTML("beforeend", "<div class='shield'><i class='fa-solid fa-shield'></i></div>");
         }
 
         else if (profile.category.name === "Modéré") {
-          button.insertAdjacentHTML("beforeend", "<div class='shield'><i class='fas fa-shield-alt'></i><i class='fas fa-shield-alt'></i></div>");
+          button.insertAdjacentHTML("beforeend", "<div class='shield'><i class='fa-solid fa-shield'></i><i class='fa-solid fa-shield'></i></div>");
         }
         else if (profile.category.name === "Elevé") {
-          button.insertAdjacentHTML("beforeend", "<div class='shield'><i class='fas fa-shield-alt'></i><i class='fas fa-shield-alt'></i><i class='fas fa-shield-alt'></i></div>");
+          button.insertAdjacentHTML("beforeend", "<div class='shield'><i class='fa-solid fa-shield'></i><i class='fa-solid fa-shield'></i><i class='fa-solid fa-shield'></i></div>");
 
         }
         button.insertAdjacentHTML('beforeend', profile.picture);
-        button.addEventListener('click', () => {
+        button.addEventListener('click', (event) => {
           // console.log("clicked")
+          document.querySelectorAll('.btn').forEach(btn => {
+            btn.style.backgroundColor = "#ccc";
+          });
+          event.currentTarget.style.backgroundColor = "#1776ca";
           changeCategory(profile.infos.id);
         });
         profilesDiv.appendChild(button);
@@ -76,7 +78,7 @@ const retrieveInfosFromUser = (userToken) => {
 const changeCategory = (profileId) => {
   chrome.cookies.get(
     { url: "http://localhost:3000", name: "signed_id" },
-    function (cookie) {
+      function (cookie) {
         fetch(`http://localhost:3000/api/v1/users/change_category`, {
           method: 'PATCH',
           headers: {
@@ -89,15 +91,7 @@ const changeCategory = (profileId) => {
         })
           .then(response => response.json())
           .then(data => {
-            // console.log(data);
-            if (data.success) {
-              alert('La catégorie a été modifiée avec succès !');
-              // retrieveInfosFromUser(userToken);
-              // chrome.runtime.sendMessage({ DOM: document.body.innerHTML });
-
-            } else {
-              alert('Une erreur est survenue lors de la modification de la catégorie.');
-            }
+            console.log(data);
           });
 
     });
