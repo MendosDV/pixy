@@ -7,15 +7,14 @@
 
   <script defer="true" src="popup.js"></script>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/all.min.css"
+  crossorigin="anonymous">
+
 
 </head>
 
 <body>
   <div class="container">
-    <h1>Pixy - Extension Chrome</h1>
-    <!-- <p>Bienvenue dans l'extension Pixy !</p> -->
-    <div id="profiles">
-    </div>
     <div class="notlogged" id="login">
       <p>Bienvenue dans l'extension Pixy !</p>
       <h3>Sorry, you need to log in first</h3>
@@ -23,6 +22,14 @@
         <a href="http://localhost:3000/users/sign_in" target="_blank" class="login-btn">Log in</a>
       </div>
     </div>
+    <div class="nav">
+    <h1>Pixy</h1>
+    <a href="http://localhost:3000/profiles" target="_blank" class="login-btn"><i class="fas fa-home"></i></a>
+
+    <!-- <p>Bienvenue dans l'extension Pixy !</p> -->
+  </div>
+  <div id="profiles">
+  </div>
 
   </div>
 </body>

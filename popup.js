@@ -40,7 +40,8 @@ const retrieveInfosFromUser = (userToken) => {
   })
     .then(response => response.json())
     .then(data => {
-      console.log(data);
+      // console.log(data);
+      // console.log(data.user);
       const profilesDiv = document.querySelector("#profiles");
       profilesDiv.innerHTML = '';
 
@@ -48,9 +49,20 @@ const retrieveInfosFromUser = (userToken) => {
         const button = document.createElement('button');
         button.classList.add('btn')
         if (data.user.current_category_id == profile.infos.category_id) {
-          button.style.backgroundColor = "red"
+          button.style.backgroundColor = "#3BC7FE"
         }
-        button.innerText = `Profil : ${profile.infos.nickname} category : ${profile.infos.category_id} `;
+        button.innerText = `Profil : ${profile.infos.nickname} category : ${profile.category.name} `;
+        if (profile.category.name === "Faible") {
+          button.insertAdjacentHTML("beforeend", "<div class='shield'><i class='fas fa-shield-alt'></i></div>");
+        }
+
+        else if (profile.category.name === "Modéré") {
+          button.insertAdjacentHTML("beforeend", "<div class='shield'><i class='fas fa-shield-alt'></i><i class='fas fa-shield-alt'></i></div>");
+        }
+        else if (profile.category.name === "Elevé") {
+          button.insertAdjacentHTML("beforeend", "<div class='shield'><i class='fas fa-shield-alt'></i><i class='fas fa-shield-alt'></i><i class='fas fa-shield-alt'></i></div>");
+
+        }
         button.insertAdjacentHTML('beforeend', profile.picture);
         button.addEventListener('click', () => {
           // console.log("clicked")
