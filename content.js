@@ -7,24 +7,28 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { /
     pixy-explication {
       position: relative;
       display: none;
-      width: 25%;
-      height: 25%;
+      width: 48vh;
       padding: 35px;
-      border: 1px solid rgba(255, 255, 255, .25);
       border-radius: 8px;
-      background-color: rgba(255, 255, 255, 0.45);
-      box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+      background-color: rgba(255, 255, 255, 1);
+      box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.7);
       backdrop-filter: blur(15px);
+      font-family: arial ,sans-serif;
     }
+
     pixy-word {
       font-size: 1.2rem;
-      color: rgb(222, 175, 73);
+      color: rgb(0, 0, 0);
       padding-bottom: 0.4rem;
-      border-bottom: 1px solid rgb(222, 175, 73);
+      padding-right: 0.3rem;
+      font-family: arial ,sans-serif;
+      font-weight: bold;
     }
-    pixy-description pixy-text {
+
+    pixy-description {
       font-size: 1rem;
-      margin-top: 1.4rem;
+      font-family: arial ,sans-serif;
+      color: #3d3d3d;
     }
 
     pixy-warning {
@@ -32,8 +36,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { /
       position: fixed;
       bottom: 24px;
       right: 24px;
-      width: 18%;
-      height: 8%;
+      width: 48vh;
       padding: 35px;
       border: 1px solid rgba(255, 255, 255, .25);
       border-radius: 8px;
@@ -41,6 +44,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { /
       box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
       backdrop-filter: blur(15px);
       opacity: 1;
+      z-index: 9999;
     }
 
     text {
@@ -54,6 +58,37 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { /
       font-weight: bold;
       color: #780000;
       font-size: 1.2rem;
+      padding-bottom: 0.4rem;
+    }
+
+    pixy-dico {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      border-bottom: 1px solid rgba(22, 38, 141,0.4);
+      padding-bottom: 0.1rem;
+      margin-bottom: 0.8rem;
+    }
+
+    dico {
+      padding-left: 0.4rem;
+      color: #16268D;
+      font-family: arial ,sans-serif;
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    pixy-category {
+      color: #16268D;
+      font-family: arial ,sans-serif;
+      font-size: 1rem;
+    }
+
+    pipe {
+      padding-right: 0.3rem;
+      color: #16268D;
+      font-family: arial ,sans-serif;
+      font-size: 1rem;
     }
   </style>
 `;
@@ -99,9 +134,9 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { /
         if (pixy) {
           let pixyWarning = document.querySelector('pixy-warning');
           pixyWarning.style.display = "block";
-          // setTimeout(function() {
-          //   fadeOut(pixyWarning);
-          // }, 10000);
+          setTimeout(function() {
+            fadeOut(pixyWarning);
+          }, 7000);
         }
       }
 
@@ -131,7 +166,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { /
           pixyWarning.style.display = "block";
           setTimeout(function() {
             fadeOut(pixyWarning);
-          }, 10000);
+          }, 7000);
         }
 
         let pixyExplication = pixy.querySelector("pixy-explication");
