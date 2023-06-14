@@ -22,9 +22,38 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { /
       padding-bottom: 0.4rem;
       border-bottom: 1px solid rgb(222, 175, 73);
     }
-    pixy-description {
+    pixy-description pixy-text {
       font-size: 1rem;
       margin-top: 1.4rem;
+    }
+
+    pixy-warning {
+      display: none;
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 18%;
+      height: 8%;
+      padding: 35px;
+      border: 1px solid rgba(255, 255, 255, .25);
+      border-radius: 8px;
+      background-color: rgb(255, 209, 181);
+      box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(15px);
+      opacity: 1;
+    }
+
+    text {
+      font-family: arial, sans-serif;
+      color: #780000;
+      font-size: 1rem;
+    }
+
+    warning {
+      font-family: arial ,sans-serif;
+      font-weight: bold;
+      color: #780000;
+      font-size: 1.2rem;
     }
   </style>
 `;
@@ -48,12 +77,34 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { /
       }
     })
 
+    function fadeOut(el) {
+      let opacity = 1;
+
+      let interval = setInterval(function() {
+        if (opacity > 0) {
+          opacity -= 0.1;
+          el.style.opacity = opacity;
+        } else {
+          clearInterval(interval);
+          el.style.display = 'none';
+        }
+      }, 50);
+    }
+
     pixies.forEach((pixy) => {
       let level = pixy.dataset.level;
-      pixy.style.textDecoration = 'underline orange wavy';
+      pixy.style.textDecoration = 'underline #FF5050 wavy';
 
       if (level === 'low') {
+        if (pixy) {
+          let pixyWarning = document.querySelector('pixy-warning');
+          pixyWarning.style.display = "block";
+          // setTimeout(function() {
+          //   fadeOut(pixyWarning);
+          // }, 10000);
+        }
       }
+
       else if (level === 'medium') {
         let pixyExplication = pixy.querySelector("pixy-explication");
 
@@ -75,6 +126,14 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { /
       }
 
       else {
+        if (pixy) {
+          let pixyWarning = document.querySelector('pixy-warning');
+          pixyWarning.style.display = "block";
+          setTimeout(function() {
+            fadeOut(pixyWarning);
+          }, 10000);
+        }
+
         let pixyExplication = pixy.querySelector("pixy-explication");
 
         pixy.addEventListener("click", function(event) {
