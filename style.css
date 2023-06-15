@@ -14,6 +14,7 @@ a {
 .btn {
   display: flex;
   position: relative;
+  justify-content: center;
   flex-direction: row-reverse;
   align-items: center;
   padding: 12px 24px;
@@ -125,9 +126,11 @@ h1 {
   border: none;
   text-align: left;
 }
+
 .login-btn{
 
 }
+
 .login-btn svg{
   width: 24px;
   height: 24px;
