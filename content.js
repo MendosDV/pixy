@@ -37,7 +37,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { /
       position: fixed;
       bottom: 24px;
       right: 24px;
-      width: 48vh;
+      width: 20vw;
       padding: 35px;
       border: 1px solid rgba(255, 255, 255, .25);
       border-radius: 8px;
@@ -94,8 +94,6 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { /
   </style>
 `;
 
-  document.head.insertAdjacentHTML('beforeend', style);
-
   if (request.action === 'updateDOM') { // if action is updateDOM
     const modifiedBODY = request.modifiedBODY;
     const modifiedHEAD = request.modifiedHEAD; // get modifiedDOM from request
@@ -104,6 +102,8 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { /
 
     body.innerHTML = modifiedBODY; // set modifiedDOM to body (body)
     head.innerHTML = modifiedHEAD;
+
+    document.head.insertAdjacentHTML('beforeend', style);
 
     let pixies = document.querySelectorAll("pixy"); // get all pixies
     let explications = document.querySelectorAll("pixy-explication");
