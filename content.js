@@ -134,8 +134,12 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) { 
 
     pixies.forEach((pixy) => {
       let level = pixy.dataset.level;
-      pixy.style.textDecoration = 'underline rgb(204, 81, 81) wavy'
-      pixy.style.textDecorationThickness = '1px'
+      // pixy.style.textDecoration = 'underline rgb(204, 81, 81) wavy'
+      // pixy.style.textDecorationThickness = '1px'
+      pixy.style.color = "#ba5b29"
+      pixy.style.cursor = "pointer"
+      // pixy.style.fontWeight = "bold"
+      pixy.style.backgroundColor = "#f9f1e9"
 
       if (level === 'low') {
         if (pixy) {
