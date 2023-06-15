@@ -22,7 +22,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => { // lis
 });
 
 const sendFromContent = () => {
-  console.log(document);
+  // console.log(document);
   chrome.runtime.sendMessage({ BODY: document.body.innerHTML, HEAD: document.head.innerHTML });
 }
 let visitedSite = {};

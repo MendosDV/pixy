@@ -1,6 +1,6 @@
 chrome.runtime.sendMessage({ message: 'executeScript' });  // send message to background
 
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { // listen for message from background
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) { // listen for message from background
   // let loader = `<div style="width: 100%; position: absolute;" class="boxLoading">Salope !!!!!!!!</div>`
   const style = `
   <style>
@@ -93,7 +93,9 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { /
     }
   </style>
 `;
-
+  if (request.action === 'refresh') {
+    window.location.reload();
+  }
   if (request.action === 'updateDOM') { // if action is updateDOM
     const modifiedBODY = request.modifiedBODY;
     const modifiedHEAD = request.modifiedHEAD; // get modifiedDOM from request
@@ -108,7 +110,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { /
     let pixies = document.querySelectorAll("pixy"); // get all pixies
     let explications = document.querySelectorAll("pixy-explication");
 
-    document.addEventListener("click", function(event) {
+    document.addEventListener("click", function (event) {
       if (event.target.tagName != 'PIXY-EXPLICATION' && event.target.tagName != 'PIXY') {
         explications.forEach((explication) => {
           explication.style.display = "none";
@@ -119,7 +121,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { /
     function fadeOut(el) {
       let opacity = 1;
 
-      let interval = setInterval(function() {
+      let interval = setInterval(function () {
         if (opacity > 0) {
           opacity -= 0.1;
           el.style.opacity = opacity;
@@ -139,7 +141,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { /
         if (pixy) {
           let pixyWarning = document.querySelector('pixy-warning');
           pixyWarning.style.display = "block";
-          setTimeout(function() {
+          setTimeout(function () {
             fadeOut(pixyWarning);
           }, 7000);
         }
@@ -148,7 +150,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { /
       else if (level === 'medium') {
         let pixyExplication = pixy.querySelector("pixy-explication");
 
-        pixy.addEventListener("click", function(event) {
+        pixy.addEventListener("click", function (event) {
           pixyExplication.style.display = "block";
           pixyExplication.style.position = "fixed";
           pixyExplication.style.bottom = "24px";
@@ -160,14 +162,14 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { /
         if (pixy) {
           let pixyWarning = document.querySelector('pixy-warning');
           pixyWarning.style.display = "block";
-          setTimeout(function() {
+          setTimeout(function () {
             fadeOut(pixyWarning);
           }, 7000);
         }
 
         let pixyExplication = pixy.querySelector("pixy-explication");
 
-        pixy.addEventListener("click", function(event) {
+        pixy.addEventListener("click", function (event) {
 
           pixyExplication.style.display = "block";
           pixyExplication.style.position = "fixed";
