@@ -47,9 +47,9 @@ const retrieveInfosFromUser = (userToken) => {
         const button = document.createElement('button');
         button.classList.add('btn')
         if (data.user.current_category_id == profile.infos.category_id) {
-          button.style.backgroundColor = "#1776ca"
+          button.style.backgroundColor = "#3B43FF";
         }
-        button.innerText = `Profil de ${profile.infos.nickname} Level ${profile.category.name} `;
+        button.innerText = `Profil de ${profile.infos.nickname} ${profile.category.name} `;
         if (profile.category.name === "Faible") {
           button.insertAdjacentHTML("beforeend", "<div class='shield'><i class='fa-solid fa-shield'></i></div>");
         }
@@ -63,11 +63,12 @@ const retrieveInfosFromUser = (userToken) => {
         }
         button.insertAdjacentHTML('beforeend', profile.picture);
         button.addEventListener('click', (event) => {
-          // console.log("clicked")
           document.querySelectorAll('.btn').forEach(btn => {
-            btn.style.backgroundColor = "#ccc";
+            btn.style.backgroundColor = "#f9f9f9";
+            btn.style.color = "black";
           });
-          event.currentTarget.style.backgroundColor = "#1776ca";
+          event.currentTarget.style.backgroundColor = "#3B43FF";
+          event.currentTarget.style.color = "white";
           changeCategory(profile.infos.id);
         });
         profilesDiv.appendChild(button);

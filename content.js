@@ -146,15 +146,6 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { /
         let pixyExplication = pixy.querySelector("pixy-explication");
 
         pixy.addEventListener("click", function(event) {
-          // const rect = pixy.getBoundingClientRect();
-          // let x = event.clientX - rect.left;
-          // let y = event.clientY - rect.top;
-          // console.log('Cursor position: ' + x + ',' + y);
-
-          // x += 10;
-          // y += 60;
-          // pixyExplication.style.top = "" + y + "px";
-          // pixyExplication.style.left = "" + x + "px";
           pixyExplication.style.display = "block";
           pixyExplication.style.position = "fixed";
           pixyExplication.style.bottom = "24px";
@@ -174,14 +165,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { /
         let pixyExplication = pixy.querySelector("pixy-explication");
 
         pixy.addEventListener("click", function(event) {
-          // const rect = pixy.getBoundingClientRect();
-          // let x = event.clientX - rect.left;
-          // let y = event.clientY - rect.top;
-          // console.log('Cursor position: ' + x + ',' + y);
 
-          // y += 60;
-          // pixyExplication.style.top = "" + y + "px";
-          // pixyExplication.style.left = "" + x + "px";
           pixyExplication.style.display = "block";
           pixyExplication.style.position = "fixed";
           pixyExplication.style.bottom = "24px";
