@@ -1,5 +1,5 @@
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => { // listen for message from background
-  if (request.DOM) { // if DOM is passed
+  if (request.BODY && request.HEAD) { // if DOM is passed
     // create a loader
     fetch("http://localhost:3000/api/v1/process_dom", {
       method: "POST",
@@ -8,22 +8,22 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => { // lis
         "Accept": "application/json"
       },
       body: JSON.stringify({
-        dom: request.DOM,  // get DOM from request
+        body: request.BODY,
+        head: request.HEAD,  // get DOM from request
         visitedSite: visitedSite
       })
     }).then(response => response.json())
       .then(data => {
-        console.log(data);
-        const modifiedDOM = data.modifiedDOM; // get modifiedDOM from response
-        console.log(modifiedDOM)
-        chrome.tabs.sendMessage(sender.tab.id, { action: 'updateDOM', modifiedDOM: modifiedDOM }); // send modifiedDOM to content
+        const modifiedBODY = data.modifiedBODY; // get modifiedBODY from response
+        const modifiedHEAD = data.modifiedHEAD; // get modifiedBODY from response
+        chrome.tabs.sendMessage(sender.tab.id, { action: 'updateDOM', modifiedBODY: modifiedBODY, modifiedHEAD: modifiedHEAD }); // send modifiedDOM to content
     })
   }
 });
 
 const sendFromContent = () => {
   console.log(document);
-  chrome.runtime.sendMessage({ DOM: document.body.innerHTML });
+  chrome.runtime.sendMessage({ BODY: document.body.innerHTML, HEAD: document.head.innerHTML });
 }
 let visitedSite = {};
 

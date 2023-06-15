@@ -97,10 +97,13 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { /
   document.head.insertAdjacentHTML('beforeend', style);
 
   if (request.action === 'updateDOM') { // if action is updateDOM
-    const modifiedDOM = request.modifiedDOM; // get modifiedDOM from request
-    const container = document.body; // get body from container
+    const modifiedBODY = request.modifiedBODY;
+    const modifiedHEAD = request.modifiedHEAD; // get modifiedDOM from request
+    const body = document.body; // get body from body
+    const head = document.head;
 
-    container.innerHTML = modifiedDOM; // set modifiedDOM to container (body)
+    body.innerHTML = modifiedBODY; // set modifiedDOM to body (body)
+    head.innerHTML = modifiedHEAD;
 
     let pixies = document.querySelectorAll("pixy"); // get all pixies
     let explications = document.querySelectorAll("pixy-explication");
