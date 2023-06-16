@@ -1,7 +1,7 @@
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => { // listen for message from background
   if (request.BODY && request.HEAD) { // if DOM is passed
     // create a loader
-    fetch("http://localhost:3000/api/v1/process_dom", {
+    fetch("https://pixysecure.me/api/v1/process_dom", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
