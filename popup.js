@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function logIn() {
   if (chrome.cookies) {
     chrome.cookies.get(
-      { url: "https://pixysecure.me", name: "signed_id" },
+      { url: "https://www.pixysecure.me", name: "signed_id" },
       function(cookie) {
         if (cookie) {
           setTimeout(() => {
@@ -26,7 +26,7 @@ function logIn() {
 }
 
 const retrieveInfosFromUser = (userToken) => {
-  fetch("https://pixysecure.me/api/v1/users", {
+  fetch("https://www.pixysecure.me/api/v1/users", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -73,9 +73,9 @@ const retrieveInfosFromUser = (userToken) => {
 
 const changeCategory = (profileId) => {
   chrome.cookies.get(
-    { url: "https://pixysecure.me", name: "signed_id" },
+    { url: "https://www.pixysecure.me", name: "signed_id" },
     function(cookie) {
-      fetch(`https://pixysecure.me/api/v1/users/change_category`, {
+      fetch(`https://www.pixysecure.me/api/v1/users/change_category`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
